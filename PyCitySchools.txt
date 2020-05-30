@@ -1,0 +1,21 @@
+PyCity Schools
+
+total_schools = len(school_data_complete["school_name"].unique())
+total_students = school_data_complete["student_name"].count()
+total_budget = sum(school_data_complete["budget"].unique())
+avg_math_score = school_data_complete["math_score"].mean()
+avg_reading_score = school_data_complete["reading_score"].mean()
+passing_math = (school_data_complete["math_score"] >= 70).sum()/total_students
+passing_reading = (school_data_complete["reading_score"] >= 70).sum()/total_students
+overall_passing = ((school_data_complete["reading_score"] >= 70) & (school_data_complete["math_score"] >= 70)).sum()/total_students
+
+summary_df = pd.DataFrame({
+    "Total Schools":[total_schools],
+    "Total Students":  '{:,}'.format(total_students),
+    "Total Budget": '${:,.2f}'.format(total_budget),
+    "Average Math Score": f'{avg_math_score:.2f}',
+    "Average Reading Score": f'{avg_reading_score:.2f}',
+    "% Passing Math":  "{0:.2%}".format(passing_math),
+    "% Passing Reading": "{0:.2%}".format(passing_reading),
+    "Overall Passing %": "{0:.2%}".format(overall_passing)
+})
